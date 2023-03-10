@@ -6,4 +6,4 @@
 
  
 # Описание API
-[Описание API](Docs/api-description/yml)
+[Описание API](Docs/api-description.yml)
