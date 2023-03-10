@@ -1,0 +1,215 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "TicTacToe",
+      "description": "Web-API для игры в крестики-нолики 3x3 для двух игроков.",
+      "version": "1.0"
+    },
+    "servers": [
+      {
+        "url": "/"
+      }
+    ],
+    "security": [
+      {
+        "Bearer": []
+      }
+    ],
+    "paths": {
+      "/api/PlayField/create": {
+        "post": {
+          "tags": [
+            "PlayField"
+          ],
+          "description": "Метод предназначен для создания нового игрового поля. Возможность создания индивидуального игрового поля может быть добавлена в последующих версиях.",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PFModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PFModel"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PFModel"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Доска успешно создана."
+            },
+            "500": {
+              "description": "Нет доступа."
+            }
+          }
+        }
+      },
+      "/api/PlayField/getall": {
+        "get": {
+          "tags": [
+            "PlayField"
+          ],
+          "description": "Метод получения всех игровых полей.",
+          "responses": {
+            "200": {
+              "description": "Запрос на получение всех текущих игровых полей успешен."
+            }
+          }
+        }
+      },
+      "/api/PlayField/{id}": {
+        "get": {
+          "tags": [
+            "PlayField"
+          ],
+          "description": "Метод получения игрового поля по ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID игрового поля.",
+              "required": true,
+              "style": "simple",
+              "explode": false,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Запрос успешно выполнен."
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "PlayField"
+          ],
+          "description": "Метод удаления игрового поля по ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID игрового поля.",
+              "required": true,
+              "style": "simple",
+              "explode": false,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Запрос на удаление успешно выполнен"
+            }
+          }
+        }
+      },
+      "/api/PlayField/update": {
+        "patch": {
+          "tags": [
+            "PlayField"
+          ],
+          "description": "Метод реализации хода игрока. Каждый четный ход делает первый игрок, в игровую клетку присваивается '1' -- 'крестик', при нечетном ходе -- игровой клетке вторым игроком присваивается числовое значение: '2' -- 'нолик'. В случае выигрыша или ничьи -- игроки получают соответствующее сообщение",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePlayFieldRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePlayFieldRequest"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePlayFieldRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Успешно выполненный запрос."
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "PFModel": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "ID игрового поля.",
+              "format": "int32"
+            },
+            "turn": {
+              "type": "integer",
+              "description": "Индекс хода игроков (четный -- первый игрок, нечетный -- второй игрок).",
+              "format": "int32"
+            },
+            "pf": {
+              "type": "array",
+              "description": "Игровое поле в виде одномерного массива.",
+              "nullable": true,
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "UpdatePlayFieldRequest": {
+          "required": [
+            "m",
+            "n",
+            "pFuk"
+          ],
+          "type": "object",
+          "properties": {
+            "pFuk": {
+              "type": "integer",
+              "description": "ID игрового поля.",
+              "format": "int32"
+            },
+            "n": {
+              "type": "integer",
+              "description": "Строка игрового поля.",
+              "format": "int32"
+            },
+            "m": {
+              "type": "integer",
+              "description": "Столбец игрового поля.",
+              "format": "int32"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "securitySchemes": {
+        "Bearer": {
+          "type": "apiKey",
+          "description": "JWT авторизация для пользователей (Может быть добавлена реализация  новых реализациях).",
+          "name": "Authorization",
+          "in": "header"
+        }
+      }
+    }
+  }

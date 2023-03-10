@@ -1,0 +1,397 @@
+<!doctype html>
+<html>
+  <head>
+    <title>TicTacToe</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>TicTacToe</h1>
+    <div class="app-desc">Web-API для игры в крестики-нолики 3x3 для двух игроков.</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 1.0</div>
+    
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+    <ol>
+      <li>APIKey KeyParamName:Authorization KeyInQuery:false KeyInHeader:true</li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#PlayField">PlayField</a></h4>
+  <ul>
+  <li><a href="#apiPlayFieldCreatePost"><code><span class="http-method">post</span> /api/PlayField/create</code></a></li>
+  <li><a href="#apiPlayFieldGetallGet"><code><span class="http-method">get</span> /api/PlayField/getall</code></a></li>
+  <li><a href="#apiPlayFieldIdDelete"><code><span class="http-method">delete</span> /api/PlayField/{id}</code></a></li>
+  <li><a href="#apiPlayFieldIdGet"><code><span class="http-method">get</span> /api/PlayField/{id}</code></a></li>
+  <li><a href="#apiPlayFieldUpdatePatch"><code><span class="http-method">patch</span> /api/PlayField/update</code></a></li>
+  </ul>
+
+  <h1><a name="PlayField">PlayField</a></h1>
+  <div class="method"><a name="apiPlayFieldCreatePost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/PlayField/create</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiPlayFieldCreatePost</span>)</div>
+    <div class="method-notes">Метод предназначен для создания нового игрового поля. Возможность создания индивидуального игрового поля может быть добавлена в последующих версиях.</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>text/json</code></li>
+      <li><code>application/*+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#PFModel">PFModel</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Доска успешно создана.
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    Нет доступа.
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiPlayFieldGetallGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/PlayField/getall</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiPlayFieldGetallGet</span>)</div>
+    <div class="method-notes">Метод получения всех игровых полей.</div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Запрос на получение всех текущих игровых полей успешен.
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiPlayFieldIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/PlayField/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiPlayFieldIdDelete</span>)</div>
+    <div class="method-notes">Метод удаления игрового поля по ID.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID игрового поля. format: int32</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Запрос на удаление успешно выполнен
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiPlayFieldIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/PlayField/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiPlayFieldIdGet</span>)</div>
+    <div class="method-notes">Метод получения игрового поля по ID.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID игрового поля. format: int32</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Запрос успешно выполнен.
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="apiPlayFieldUpdatePatch"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="patch"><code class="huge"><span class="http-method">patch</span> /api/PlayField/update</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">apiPlayFieldUpdatePatch</span>)</div>
+    <div class="method-notes">Метод реализации хода игрока. Каждый четный ход делает первый игрок, в игровую клетку присваивается '1' -- 'крестик', при нечетном ходе -- игровой клетке вторым игроком присваивается числовое значение: '2' -- 'нолик'. В случае выигрыша или ничьи -- игроки получают соответствующее сообщение</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>text/json</code></li>
+      <li><code>application/*+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#UpdatePlayFieldRequest">UpdatePlayFieldRequest</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Успешно выполненный запрос.
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#PFModel"><code>PFModel</code></a></li>
+    <li><a href="#UpdatePlayFieldRequest"><code>UpdatePlayFieldRequest</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="PFModel"><code>PFModel</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> ID игрового поля. format: int32</div>
+<div class="param">turn (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Индекс хода игроков (четный -- первый игрок, нечетный -- второй игрок). format: int32</div>
+<div class="param">pf (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">array[Integer]</a></span> Игровое поле в виде одномерного массива. format: int32</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UpdatePlayFieldRequest"><code>UpdatePlayFieldRequest</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">pFuk </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> ID игрового поля. format: int32</div>
+<div class="param">n </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Строка игрового поля. format: int32</div>
+<div class="param">m </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Столбец игрового поля. format: int32</div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

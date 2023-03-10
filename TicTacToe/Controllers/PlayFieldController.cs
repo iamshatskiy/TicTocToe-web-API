@@ -10,12 +10,14 @@ using TicTacToe.Services;
 using TicTacToe.Entities;
 using TicTacToe.Services;
 using TicTacToe.Models;
+using System.ComponentModel;
 
 namespace TicTacToe.Controllers
 {
     
     [Route("api/[controller]")]
     [ApiController]
+    
     public class PlayFieldController : ControllerBase
     {
         private IPlayFieldService _playService;
@@ -85,7 +87,7 @@ namespace TicTacToe.Controllers
                     return Ok("Player №2 is winner!");
             }
 
-            return NoContent();  //return 204(NO CONTENT)
+            return NoContent();  
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
@@ -99,7 +101,7 @@ namespace TicTacToe.Controllers
 
             _playService.DeletePlayField(p);
 
-            return NoContent();  //return 204(NO CONTENT)
+            return NoContent();  
         }
 
     }
