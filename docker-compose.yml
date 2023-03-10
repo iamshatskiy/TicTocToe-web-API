@@ -1,12 +1,7 @@
 version: '3.4'
 
 services:
-  tictactoe:
-    container_name: web-api
-    image: ${DOCKER_REGISTRY-}tictactoe
-    build:
-      context: .
-      dockerfile: TicTacToe/Dockerfile
+  
   postgres:
     container_name: ttt-db
     image: postgres:12.8
@@ -18,3 +13,20 @@ services:
       - ./db_build:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
+    networks:
+     - my_network
+  tictactoe:
+    container_name: web-api
+    image: ${DOCKER_REGISTRY-}tictactoe
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    build:
+      context: .
+      dockerfile: TicTacToe/Dockerfile
+    networks:
+     - my_network
+networks:
+  my_network:
+    driver: bridge
